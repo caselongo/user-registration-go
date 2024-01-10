@@ -1,0 +1,22 @@
+{{template "base" .}}
+
+{{define "content"}}
+    <div class="col-offset-4 col-4">
+        {{ $email := index .Data "email" }}
+        <form method="post" action="/forgot">
+            <input name="csrf_token" type="hidden" value="{{ .CsrfToken }}">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                {{with .Form.Errors.Get "email"}}
+                    <small class="text-danger d-block">{{.}}</small>
+                {{end}}
+                <input name="email" type="email" class="form-control {{with .Form.Errors.Get "email"}} is-invalid {{end}}" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $email }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Get password reset email</button>
+        </form>
+
+        <p class="mt-3">
+            <a href="/login">Login</a>
+        </p>
+    </div>
+{{end}}

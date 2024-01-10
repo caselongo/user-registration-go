@@ -1,0 +1,26 @@
+{{template "base" .}}
+
+{{define "content"}}
+    <div class="col-offset-4 col-4">
+        {{ $code := index .Data "code" }}
+        <form method="post" action="/reset">
+            <input name="csrf_token" type="hidden" value="{{ .CsrfToken }}">
+            <input name="code" type="hidden" value="{{ $code }}">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">New Password</label>
+                {{with .Form.Errors.Get "password"}}
+                    <small class="text-danger d-block">{{.}}</small>
+                {{end}}
+                <input name="password" type="password" class="form-control {{with .Form.Errors.Get "password"}} is-invalid {{end}}" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword2" class="form-label">Confirm New Password</label>
+                {{with .Form.Errors.Get "confirm-password"}}
+                    <label class="text-danger d-block">{{.}}</label>
+                {{end}}
+                <input name="confirm-password" type="password" class="form-control {{with .Form.Errors.Get "confirm-password"}} is-invalid {{end}}" id="exampleInputPassword2">
+            </div>
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+        </form>
+    </div>
+{{end}}

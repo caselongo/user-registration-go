@@ -1,0 +1,13 @@
+{{template "base" .}}
+
+{{define "content"}}
+    <div class="col-12 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 p-3 text-center">
+        <div class="alert alert-{{ index .Data "state"}}" role="alert">
+            {{ index .Data "message"}}
+        </div>
+
+        {{ if index .Data "show-login" }}
+            <a href="/login">Login</a>
+        {{ end }}
+    </div>
+{{end}}
