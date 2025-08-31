@@ -8,4 +8,5 @@ type User struct {
 	ConfirmationCode string
 	CreatedAt        time.Time
 	ConfirmedAt      *time.Time
+	Properties       map[string]string
 }
